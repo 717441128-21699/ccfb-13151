@@ -1,0 +1,19 @@
+{
+  "name": "@mahjong/web",
+  "version": "0.1.0",
+  "type": "module",
+  "private": true,
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview"
+  },
+  "dependencies": {
+    "@mahjong/core": "*",
+    "@mahjong/rules": "*",
+    "@mahjong/validate": "*"
+  },
+  "devDependencies": {
+    "vite": "^5.4.11"
+  }
+}

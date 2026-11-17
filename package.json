@@ -1,0 +1,21 @@
+{
+  "name": "mahjong-rule-platform",
+  "private": true,
+  "version": "0.1.0",
+  "description": "地方麻将规则配置与验证平台（规则 DSL / 拆牌引擎 / 番种引擎 / 金手回归 / Web 配置台）",
+  "workspaces": [
+    "packages/*"
+  ],
+  "scripts": {
+    "build": "tsc -b packages/core packages/rules packages/validate",
+    "test": "node --import tsx --test packages/core/test/*.test.ts packages/validate/test/*.test.ts",
+    "bench": "tsx packages/core/bench/bench.ts",
+    "golden": "tsx packages/validate/src/runGolden.ts",
+    "web": "npm run dev --workspace @mahjong/web"
+  },
+  "devDependencies": {
+    "@types/node": "^26.6.6",
+    "tsx": "^4.23.15",
+    "typescript": "^5.7.2"
+  }
+}
