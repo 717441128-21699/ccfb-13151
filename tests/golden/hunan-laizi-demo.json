@@ -1,0 +1,55 @@
+{
+  "schemaVersion": "1.0",
+  "cases": [
+    {
+      "id": "lz-001",
+      "hand": "123m 456m 789m 123p 5m*5m*",
+      "wildcards": 2,
+      "game": { "winMethod": "selfDraw", "exposedKongs": 0, "concealedKongs": 0, "exposedMelds": 0, "isLastTile": false, "absentSuit": null },
+      "isWin": true,
+      "expectedFanTotal": 3,
+      "expectedFanIds": ["pinghu", "laizihu", "zimo"],
+      "note": "两赖将 + 平胡1 + 赖子胡1 + 自摸1"
+    },
+    {
+      "id": "lz-002",
+      "hand": "123m 456m 789m 234m 5m*5m*",
+      "wildcards": 2,
+      "game": { "winMethod": "discard", "exposedKongs": 0, "concealedKongs": 0, "exposedMelds": 0, "isLastTile": false, "absentSuit": null },
+      "isWin": true,
+      "expectedFanTotal": 2,
+      "expectedFanIds": ["pinghu", "laizihu"],
+      "note": "赖子参与的清一色不认定大牌，按平胡+赖子胡计"
+    },
+    {
+      "id": "lz-003",
+      "hand": "123m 456m 789m 234m 55m",
+      "wildcards": 0,
+      "game": { "winMethod": "selfDraw", "exposedKongs": 0, "concealedKongs": 0, "exposedMelds": 0, "isLastTile": false, "absentSuit": null },
+      "isWin": true,
+      "expectedFanTotal": 6,
+      "expectedFanIds": ["qingyise", "tianran", "zimo"],
+      "note": "天然清一色3 + 天然胡2 + 自摸1 = 6，恰好封顶"
+    },
+    {
+      "id": "lz-004",
+      "hand": "11m 33m 55m 77m 99m 22p 1p 5m*",
+      "wildcards": 1,
+      "game": { "winMethod": "discard", "exposedKongs": 0, "concealedKongs": 0, "exposedMelds": 0, "isLastTile": false, "absentSuit": null },
+      "isWin": true,
+      "expectedFanIds": ["qidui", "laizihu"],
+      "assertContainsOnly": false,
+      "note": "六对 + 单张 1p + 一赖配成七对；只断言番种集合包含"
+    },
+    {
+      "id": "lz-005",
+      "hand": "135m 246m 789m 123p ES",
+      "wildcards": 0,
+      "game": { "winMethod": "discard", "exposedKongs": 0, "concealedKongs": 0, "exposedMelds": 0, "isLastTile": false, "absentSuit": null },
+      "isWin": false,
+      "expectedFanTotal": 0,
+      "expectedFanIds": [],
+      "note": "无赖散牌不胡"
+    }
+  ]
+}

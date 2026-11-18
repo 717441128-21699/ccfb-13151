@@ -1,0 +1,58 @@
+{
+  "schemaVersion": "1.0",
+  "cases": [
+    {
+      "id": "gb-001",
+      "hand": "19m 19s 19p ESWN ZFB E",
+      "wildcards": 0,
+      "game": { "winMethod": "discard", "exposedKongs": 0, "concealedKongs": 0, "exposedMelds": 0, "isLastTile": false, "absentSuit": null },
+      "isWin": true,
+      "expectedFanTotal": 88,
+      "expectedFanIds": ["shisanyao"],
+      "note": "十三幺 88 番"
+    },
+    {
+      "id": "gb-002",
+      "hand": "123m 456m 789m 234p 55p",
+      "wildcards": 0,
+      "game": { "winMethod": "selfDraw", "exposedKongs": 0, "concealedKongs": 0, "exposedMelds": 0, "isLastTile": false, "absentSuit": null },
+      "isWin": true,
+      "expectedFanTotal": 6,
+      "expectedFanIds": ["pinghuhe", "wuziyise", "menqianqing", "zimo"],
+      "canWinExpected": false,
+      "note": "合计 6 番，低于 8 番起胡线"
+    },
+    {
+      "id": "gb-003",
+      "hand": "234m 456m 678m 789m 55m",
+      "wildcards": 0,
+      "game": { "winMethod": "discard", "exposedKongs": 0, "concealedKongs": 0, "exposedMelds": 0, "isLastTile": false, "absentSuit": null },
+      "isWin": true,
+      "expectedFanTotal": 24,
+      "expectedFanIds": ["qingyise"],
+      "note": "清一色 24，低番全部被包含"
+    },
+    {
+      "id": "gb-004",
+      "hand": "123m 456m 789m 234p 55p",
+      "wildcards": 0,
+      "game": { "winMethod": "lastTile", "exposedKongs": 0, "concealedKongs": 0, "exposedMelds": 0, "isLastTile": true, "absentSuit": null },
+      "isWin": true,
+      "expectedFanTotal": 13,
+      "expectedFanIds": ["pinghuhe", "wuziyise", "menqianqing", "haidilao"],
+      "canWinExpected": true,
+      "note": "海底 8 番加成后过起胡线"
+    },
+    {
+      "id": "gb-005",
+      "hand": "111m 111s 111p 234p 55p",
+      "wildcards": 0,
+      "game": { "winMethod": "discard", "exposedKongs": 0, "concealedKongs": 0, "exposedMelds": 0, "isLastTile": false, "absentSuit": null },
+      "isWin": true,
+      "expectedFanTotal": 19,
+      "expectedFanIds": ["sanjieke-tri"],
+      "assertContainsOnly": false,
+      "note": "三色三同刻 16 + 无字 1 + 门前清 2 = 19；断言包含该番且总值 19"
+    }
+  ]
+}

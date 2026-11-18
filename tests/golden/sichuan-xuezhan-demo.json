@@ -1,0 +1,67 @@
+{
+  "schemaVersion": "1.0",
+  "description": "黄金牌局套件格式。每种地方玩法一个文件，每一手都由人工核对 expected；CI 中逐手比对，算番一手都不能错。真实接入时把 10 玩法 × 50 手按本格式投放，文件名即规则包 id。",
+  "cases": [
+    {
+      "id": "sc-001",
+      "hand": "123m 456m 789m 123p 55p",
+      "wildcards": 0,
+      "game": { "winMethod": "discard", "exposedKongs": 0, "concealedKongs": 0, "exposedMelds": 0, "isLastTile": false, "absentSuit": "s" },
+      "isWin": true,
+      "expectedFanTotal": 1,
+      "expectedFanIds": ["pinghu"],
+      "note": "缺条、平胡点炮（数牌将），1 番"
+    },
+    {
+      "id": "sc-002",
+      "hand": "123m 456m 789m 234m 55m",
+      "wildcards": 0,
+      "game": { "winMethod": "selfDraw", "exposedKongs": 0, "concealedKongs": 0, "exposedMelds": 0, "isLastTile": false, "absentSuit": "p" },
+      "isWin": true,
+      "expectedFanTotal": 3,
+      "expectedFanIds": ["qingyise", "zimo"],
+      "note": "清一色自摸 2+1=3"
+    },
+    {
+      "id": "sc-003",
+      "hand": "111m 333m 555m 777m 99m",
+      "wildcards": 0,
+      "game": { "winMethod": "supplementKong", "exposedKongs": 0, "concealedKongs": 0, "exposedMelds": 0, "isLastTile": true, "absentSuit": "p" },
+      "isWin": true,
+      "expectedFanTotal": 3,
+      "expectedFanIds": ["qingyise", "penghu", "zimo", "haidilao", "gangshanghua"],
+      "note": "原始 6 番（清2+碰1+自摸1+海底1+杠上花1），三番封顶；expectedFanTotal 为封顶后值"
+    },
+    {
+      "id": "sc-004",
+      "hand": "11m 33m 55m 77m 99m 22p 44p",
+      "wildcards": 0,
+      "game": { "winMethod": "discard", "exposedKongs": 0, "concealedKongs": 0, "exposedMelds": 0, "isLastTile": false, "absentSuit": "s" },
+      "isWin": true,
+      "expectedFanTotal": 2,
+      "expectedFanIds": ["qidui"],
+      "note": "七对 2 番"
+    },
+    {
+      "id": "sc-005",
+      "hand": "123m 456m 789m 123p ES",
+      "wildcards": 0,
+      "game": { "winMethod": "discard", "exposedKongs": 0, "concealedKongs": 0, "exposedMelds": 0, "isLastTile": false, "absentSuit": null },
+      "isWin": false,
+      "expectedFanTotal": 0,
+      "expectedFanIds": [],
+      "note": "散牌不能胡"
+    },
+    {
+      "id": "sc-006",
+      "hand": "123m 456m 789m 234m 55m",
+      "wildcards": 0,
+      "game": { "winMethod": "discard", "exposedKongs": 0, "concealedKongs": 0, "exposedMelds": 0, "isLastTile": false, "absentSuit": null },
+      "isWin": true,
+      "expectedFanTotal": 0,
+      "expectedFanIds": [],
+      "structuralReject": "missingSuit",
+      "note": "牌型能胡但未定缺，结构性拒绝"
+    }
+  ]
+}
