@@ -1,0 +1,122 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>地方麻将规则配置与验证平台</title>
+<style>
+  :root { --bg:#f5f6f8; --card:#fff; --line:#dfe3e8; --ink:#1f2329; --dim:#6b7280; --accent:#0b6e4f; }
+  * { box-sizing: border-box; }
+  body { margin:0; font:14px/1.6 "Microsoft YaHei",system-ui,sans-serif; background:var(--bg); color:var(--ink); }
+  header { background:#10312b; color:#fff; padding:10px 20px; }
+  header h1 { font-size:17px; margin:0; }
+  nav { display:flex; gap:4px; padding:8px 20px 0; background:#10312b; }
+  nav button { background:transparent; color:#bcd; border:0; padding:8px 16px; cursor:pointer; font-size:14px; border-radius:6px 6px 0 0; }
+  nav button.active { background:var(--bg); color:var(--ink); font-weight:600; }
+  main { padding:16px 20px 60px; max-width:1180px; margin:0 auto; }
+  .card { background:var(--card); border:1px solid var(--line); border-radius:8px; padding:14px 16px; margin-bottom:14px; }
+  .card h2 { font-size:15px; margin:0 0 10px; }
+  label { color:var(--dim); margin-right:6px; }
+  select,input[type=text] { padding:4px 8px; border:1px solid var(--line); border-radius:5px; font:inherit; }
+  button.primary { background:var(--accent); color:#fff; border:0; padding:7px 22px; border-radius:6px; font-size:14px; cursor:pointer; }
+  button.ghost { background:#fff; border:1px solid var(--line); padding:5px 14px; border-radius:6px; cursor:pointer; }
+  .row { display:flex; gap:14px; flex-wrap:wrap; align-items:center; }
+  .tiles { display:flex; flex-wrap:wrap; gap:4px; margin:6px 0; }
+  .tile { min-width:34px; height:46px; border:1px solid #b9c0c9; border-bottom-width:3px; border-radius:5px; background:#fff;
+          display:inline-flex; align-items:center; justify-content:center; cursor:pointer; font-size:15px; padding:0 4px; user-select:none; }
+  .tile:hover { background:#eef7f2; }
+  .tile.s0 { color:#c0392b; } .tile.s1 { color:#2166ac; } .tile.s2 { color:#1e8449; } .tile.honor { color:#333; }
+  .tile.laizi { border-color:#d4a017; box-shadow:0 0 0 2px #f5d773 inset; }
+  .tile.hand { background:#fdf6e3; }
+  .checks label { margin-right:14px; color:var(--ink); }
+  table { border-collapse:collapse; width:100%; }
+  th,td { border:1px solid var(--line); padding:5px 9px; text-align:left; font-size:13px; }
+  th { background:#f0f2f5; }
+  .ok { color:var(--accent); font-weight:700; }
+  .bad { color:#c0392b; font-weight:700; }
+  .dim { color:var(--dim); }
+  textarea { width:100%; min-height:420px; font:12px/1.5 Consolas,monospace; border:1px solid var(--line); border-radius:6px; padding:10px; }
+  .err { color:#c0392b; white-space:pre-wrap; }
+  .doc h1 { font-size:20px; } .doc h2 { font-size:16px; margin-top:18px; border-bottom:1px solid var(--line); padding-bottom:4px; }
+  .doc blockquote { margin:6px 0; padding:2px 12px; border-left:3px solid var(--line); color:var(--dim); }
+  .hidden { display:none; }
+</style>
+</head>
+<body>
+<header><h1>地方麻将规则配置与验证平台</h1></header>
+<nav>
+  <button data-tab="play" class="active">牌桌验算</button>
+  <button data-tab="config">规则配置</button>
+  <button data-tab="doc">规则说明</button>
+</nav>
+<main>
+  <section id="tab-play">
+    <div class="card">
+      <div class="row">
+        <span><label>玩法</label><select id="packSelect"></select></span>
+        <span class="dim" id="packDesc"></span>
+      </div>
+    </div>
+    <div class="card">
+      <h2>摆牌(点击上牌,再点手牌移除)</h2>
+      <div id="palette"></div>
+      <h2 style="margin-top:10px">手牌 <span class="dim" id="handCount"></span></h2>
+      <div class="tiles" id="handView"></div>
+    </div>
+    <div class="card checks">
+      <h2>胡牌上下文</h2>
+      <div class="row">
+        <label><input type="checkbox" id="ctxZimo"> 自摸</label>
+        <label><input type="checkbox" id="ctxRobKong"> 抢杠胡</label>
+        <label><input type="checkbox" id="ctxLastWall"> 海底捞月</label>
+        <label><input type="checkbox" id="ctxLastDiscard"> 河底捞鱼</label>
+        <label><input type="checkbox" id="ctxKongFlower"> 杠上开花</label>
+        <label><input type="checkbox" id="ctxTian"> 天胡</label>
+        <label><input type="checkbox" id="ctxDi"> 地胡</label>
+      </div>
+      <div class="row" style="margin-top:8px">
+        <span><label>门风</label><select id="ctxSeatWind"><option value="">无</option><option value="1z">东</option><option value="2z">南</option><option value="3z">西</option><option value="4z">北</option></select></span>
+        <span><label>圈风</label><select id="ctxPrevWind"><option value="">无</option><option value="1z">东</option><option value="2z">南</option><option value="3z">西</option><option value="4z">北</option></select></span>
+        <span><label>花牌</label><input type="text" id="ctxFlowers" placeholder="如 f1 f3" size="10"></span>
+        <span><label>副露</label><input type="text" id="ctxMelds" placeholder="如 peng:5m gang:3z" size="22"></span>
+      </div>
+      <div class="row" style="margin-top:10px">
+        <button class="primary" id="evalBtn">验算</button>
+        <span class="dim" id="elapsed"></span>
+      </div>
+    </div>
+    <div class="card" id="resultCard">
+      <h2>结果</h2>
+      <div id="resultSummary" class="dim">尚未验算</div>
+      <div id="resultFans"></div>
+      <div id="resultAll"></div>
+    </div>
+  </section>
+
+  <section id="tab-config" class="hidden">
+    <div class="card">
+      <div class="row">
+        <span><label>玩法</label><select id="cfgPackSelect"></select></span>
+        <button class="ghost" id="cfgValidate">校验</button>
+        <button class="primary" id="cfgApply">校验并应用</button>
+        <button class="ghost" id="cfgReset">恢复内置</button>
+      </div>
+      <p class="dim">JSON 即规则包全部配置:牌墙构成、赖子、胡牌结构、番种(谓词+参数+不计关系)、封顶、优先级、边角规则。保存后存于浏览器本地,验算与规则说明立即生效。</p>
+      <div id="cfgErrors" class="err"></div>
+      <textarea id="cfgJson" spellcheck="false"></textarea>
+    </div>
+  </section>
+
+  <section id="tab-doc" class="hidden">
+    <div class="card">
+      <div class="row">
+        <span><label>玩法</label><select id="docPackSelect"></select></span>
+        <button class="ghost" id="docCopy">复制 Markdown</button>
+      </div>
+    </div>
+    <div class="card doc" id="docView"></div>
+  </section>
+</main>
+<script type="module" src="./dist/apps/web/src/main.js"></script>
+</body>
+</html>

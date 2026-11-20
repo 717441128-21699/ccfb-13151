@@ -1,0 +1,50 @@
+{
+  "pack": "mcr",
+  "description": "国标麻将(核心番种)验证牌局,8 分起胡",
+  "cases": [
+    {
+      "id": "mcr-001",
+      "note": "无字1+门前清2=3 分,不足 8 分不能胡",
+      "hand": "1m 2m 3m 2m 3m 4m 5p 6p 7p 8s 8s 8s 9p 9p",
+      "expect": { "win": false }
+    },
+    {
+      "id": "mcr-002",
+      "note": "清一色24(不计无字)+平胡2+门前清2=28",
+      "hand": "1m 2m 3m 2m 3m 4m 4m 5m 6m 7m 8m 9m 9m 9m",
+      "expect": { "win": true, "totalFen": 28, "fans": ["清一色", "平胡", "门前清"] }
+    },
+    {
+      "id": "mcr-003",
+      "note": "十三幺 88,不计门前清",
+      "hand": "1m 9m 1p 9p 1s 9s 1z 2z 3z 4z 5z 6z 7z 7z",
+      "expect": { "win": true, "totalFen": 88, "fans": ["十三幺"] }
+    },
+    {
+      "id": "mcr-004",
+      "note": "碰碰胡6+混一色6+箭刻2+门前清2=16",
+      "hand": "1m 1m 1m 2m 2m 2m 3m 3m 3m 5z 5z 5z 7m 7m",
+      "expect": { "win": true, "totalFen": 16, "fans": ["碰碰胡", "混一色", "门前清", "箭刻"] }
+    },
+    {
+      "id": "mcr-005",
+      "note": "花牌 3 张,每张 1 分",
+      "hand": "1m 1m 1m 2m 2m 2m 3m 3m 3m 5z 5z 5z 7m 7m",
+      "context": { "flowers": ["f1", "f2", "f3"] },
+      "expect": { "win": true, "totalFen": 19, "fans": ["碰碰胡", "混一色", "门前清", "箭刻", "花牌"] }
+    },
+    {
+      "id": "mcr-006",
+      "note": "抢杠胡8+平胡2+门前清2+无字1=13",
+      "hand": "1m 2m 3m 4m 5m 6m 7p 8p 9p 2s 3s 4s 9p 9p",
+      "context": { "isRobKong": true },
+      "expect": { "win": true, "totalFen": 13, "fans": ["抢杠胡", "平胡", "门前清", "无字"] }
+    },
+    {
+      "id": "mcr-007",
+      "note": "混幺九32(不计碰碰胡、全带幺)+门前清2=34",
+      "hand": "1m 1m 1m 9m 9m 9m 1p 1p 1p 1z 1z 1z 9s 9s",
+      "expect": { "win": true, "totalFen": 34, "fans": ["混幺九", "门前清"] }
+    }
+  ]
+}

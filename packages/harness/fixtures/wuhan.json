@@ -1,0 +1,57 @@
+{
+  "pack": "wuhan",
+  "description": "武汉麻将(红中赖子)验证牌局",
+  "cases": [
+    {
+      "id": "wh-001",
+      "note": "软胡:赖子代牌成将,不计硬胡",
+      "hand": "1m 2m 3m 4p 5p 6p 7s 8s 9s 2s 3s 4s 9p 5z",
+      "expect": { "win": true, "totalFan": 0, "fans": [] }
+    },
+    {
+      "id": "wh-002",
+      "note": "硬胡+自摸:红中全当自身",
+      "hand": "1m 2m 3m 4m 5m 6m 7p 8p 9p 2s 2s 5z 5z 5z",
+      "context": { "isZimo": true },
+      "expect": { "win": true, "totalFan": 2, "fans": ["硬胡", "自摸"] }
+    },
+    {
+      "id": "wh-003",
+      "note": "碰碰胡+硬胡",
+      "hand": "1m 1m 1m 2m 2m 2m 3p 3p 3p 5s 5s 5s 7m 7m",
+      "expect": { "win": true, "totalFan": 3, "fans": ["碰碰胡", "硬胡"] }
+    },
+    {
+      "id": "wh-004",
+      "note": "清一色+碰碰胡+硬胡",
+      "hand": "1m 1m 1m 2m 2m 2m 3m 3m 3m 5m 5m 5m 7m 7m",
+      "expect": { "win": true, "totalFan": 6, "fans": ["清一色", "碰碰胡", "硬胡"] }
+    },
+    {
+      "id": "wh-005",
+      "note": "七对+硬胡",
+      "hand": "1m 1m 2m 2m 3m 3m 4p 4p 5p 5p 6s 6s 7s 7s",
+      "expect": { "win": true, "totalFan": 3, "fans": ["七对", "硬胡"] }
+    },
+    {
+      "id": "wh-006",
+      "note": "海底捞月+碰碰胡+硬胡+自摸",
+      "hand": "1m 1m 1m 2m 2m 2m 3p 3p 3p 5s 5s 5s 7m 7m",
+      "context": { "isZimo": true, "isLastWallTile": true },
+      "expect": { "win": true, "totalFan": 5, "fans": ["海底捞月", "碰碰胡", "硬胡", "自摸"] }
+    },
+    {
+      "id": "wh-007",
+      "note": "赖子配单张成七对(软胡)",
+      "hand": "1m 1m 2m 2m 3m 3m 4p 4p 5p 5p 6s 6s 7s 5z",
+      "expect": { "win": true, "totalFan": 2, "fans": ["七对"] }
+    },
+    {
+      "id": "wh-008",
+      "note": "抢杠胡+硬胡",
+      "hand": "1m 2m 3m 4p 5p 6p 7s 8s 9s 2s 3s 4s 9p 9p",
+      "context": { "isRobKong": true },
+      "expect": { "win": true, "totalFan": 2, "fans": ["抢杠胡", "硬胡"] }
+    }
+  ]
+}

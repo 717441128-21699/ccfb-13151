@@ -1,0 +1,45 @@
+{
+  "pack": "sichuan",
+  "description": "四川血战到底验证牌局(必须缺门)",
+  "cases": [
+    {
+      "id": "sc-001",
+      "note": "三门齐全,不能胡",
+      "hand": "1m 2m 3m 4p 5p 6p 7s 8s 9s 2s 3s 4s 9p 9p",
+      "expect": { "win": false }
+    },
+    {
+      "id": "sc-002",
+      "note": "缺条子,平胡 0 番",
+      "hand": "1m 2m 3m 4m 5m 6m 7m 8m 9m 2p 3p 4p 9p 9p",
+      "expect": { "win": true, "totalFan": 0, "fans": [] }
+    },
+    {
+      "id": "sc-003",
+      "note": "清一色 4 番",
+      "hand": "1m 2m 3m 2m 3m 4m 4m 5m 6m 7m 8m 9m 9m 9m",
+      "expect": { "win": true, "totalFan": 4, "fans": ["清一色"] }
+    },
+    {
+      "id": "sc-004",
+      "note": "自摸+根(一杠)",
+      "hand": "1m 2m 3m 4m 5m 6m 7m 8m 9m 5p 5p",
+      "context": { "isZimo": true, "melds": [{ "kind": "gang", "base": "3p" }] },
+      "expect": { "win": true, "totalFan": 2, "fans": ["根", "自摸"] }
+    },
+    {
+      "id": "sc-005",
+      "note": "抢杠胡",
+      "hand": "1m 2m 3m 4m 5m 6m 7m 8m 9m 2p 3p 4p 9p 9p",
+      "context": { "isRobKong": true },
+      "expect": { "win": true, "totalFan": 1, "fans": ["抢杠胡"] }
+    },
+    {
+      "id": "sc-006",
+      "note": "大对子+自摸",
+      "hand": "1m 1m 1m 2m 2m 2m 3m 3m 3m 5p 5p 5p 7p 7p",
+      "context": { "isZimo": true },
+      "expect": { "win": true, "totalFan": 3, "fans": ["大对子", "自摸"] }
+    }
+  ]
+}

@@ -1,0 +1,45 @@
+/**
+ * 国标麻将(MCR)核心番种子集:81 番种中最常用的 20 个,
+ * 8 分起胡,演示"不计"(番种包含)关系。其余番种按同样方式补充即可。
+ */
+export const mcr = {
+    id: 'mcr',
+    name: '国标麻将(核心番种)',
+    region: '全国',
+    description: '国家体育总局《中国麻将竞赛规则》核心番种子集,8 分起胡。',
+    tiles: { suits: ['m', 'p', 's'], winds: true, dragons: true, flowers: 8 },
+    laizi: null,
+    structures: ['standard', 'qidui', 'shisanyao'],
+    fans: [
+        { id: 'shisanyao', name: '十三幺', score: 88, unit: 'fen', predicate: 'shisanyao', excludes: ['menqing'], description: '13 种幺九牌各一 + 一对' },
+        { id: 'ziyise', name: '字一色', score: 64, unit: 'fen', predicate: 'allHonors', excludes: ['penghu'], description: '全是字牌,不计碰碰胡' },
+        { id: 'hunyaojiu', name: '混幺九', score: 32, unit: 'fen', predicate: 'hunYaoJiu', excludes: ['penghu', 'quandaiyao'], description: '幺九刻子碰碰胡,不计碰碰胡、全带幺' },
+        { id: 'qidui', name: '七对', score: 24, unit: 'fen', predicate: 'qidui', excludes: ['menqing'], description: '不计门前清' },
+        { id: 'qingyise', name: '清一色', score: 24, unit: 'fen', predicate: 'oneSuit', excludes: ['wuzi'], description: '不计无字' },
+        { id: 'miaoshou', name: '妙手回春', score: 8, unit: 'fen', predicate: 'kongFlower', description: '杠上开花' },
+        { id: 'haidilao', name: '海底捞月', score: 8, unit: 'fen', predicate: 'haidilao' },
+        { id: 'qianggang', name: '抢杠胡', score: 8, unit: 'fen', predicate: 'robbingKong' },
+        { id: 'penghu', name: '碰碰胡', score: 6, unit: 'fen', predicate: 'allKezi' },
+        { id: 'hunyise', name: '混一色', score: 6, unit: 'fen', predicate: 'mixedOneSuit' },
+        { id: 'quandaiyao', name: '全带幺', score: 4, unit: 'fen', predicate: 'quanDaiYao' },
+        { id: 'pinghu', name: '平胡', score: 2, unit: 'fen', predicate: 'allShunzi', params: { pairNotIn: 'honors' }, description: '四顺子 + 非字牌将' },
+        { id: 'duanyao', name: '断幺', score: 2, unit: 'fen', predicate: 'noYao' },
+        { id: 'menqing', name: '门前清', score: 2, unit: 'fen', predicate: 'menqing' },
+        { id: 'jianke', name: '箭刻', score: 2, unit: 'fen', predicate: 'dragonPung' },
+        { id: 'quanfeng', name: '圈风刻', score: 2, unit: 'fen', predicate: 'windPung', params: { wind: 'prevalent' } },
+        { id: 'menfeng', name: '门风刻', score: 2, unit: 'fen', predicate: 'windPung', params: { wind: 'seat' } },
+        { id: 'wuzi', name: '无字', score: 1, unit: 'fen', predicate: 'noHonors' },
+        { id: 'zimo', name: '自摸', score: 1, unit: 'fen', predicate: 'selfDraw' },
+        { id: 'huapai', name: '花牌', score: 1, unit: 'fen', predicate: 'hasFlowers', multiplyBy: 'flowers', description: '每张 1 分' },
+    ],
+    cap: {},
+    scoring: { rankBy: 'fen', minFenToWin: 8, formula: { type: 'fen' } },
+    priorities: { hu: 4, gang: 3, peng: 2, chi: 1 },
+    edge: {
+        yiPaoDuoXiang: false, // 国标截胡
+        qiangGangHu: 'addedKong',
+        haidilao: true,
+        hediyu: true,
+        kongFlower: true,
+    },
+};

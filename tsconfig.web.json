@@ -1,0 +1,14 @@
+{
+  "compilerOptions": {
+    "target": "es2022",
+    "module": "esnext",
+    "moduleResolution": "bundler",
+    "rewriteRelativeImportExtensions": true,
+    "outDir": "apps/web/dist",
+    "rootDir": ".",
+    "strict": true,
+    "skipLibCheck": true,
+    "lib": ["es2022", "dom", "dom.iterable"]
+  },
+  "include": ["packages/core/src", "packages/rulepacks/src", "apps/web/src"]
+}

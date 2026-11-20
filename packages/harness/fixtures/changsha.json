@@ -1,0 +1,37 @@
+{
+  "pack": "changsha",
+  "description": "长沙麻将验证牌局(将将胡/缺一色)",
+  "cases": [
+    {
+      "id": "cs-001",
+      "note": "将将胡4+碰碰胡2",
+      "hand": "2m 2m 2m 5m 5m 5m 8p 8p 8p 2s 2s 2s 5s 5s",
+      "expect": { "win": true, "totalFan": 6, "fans": ["将将胡", "碰碰胡"] }
+    },
+    {
+      "id": "cs-002",
+      "note": "缺一色 1 番",
+      "hand": "1m 2m 3m 4m 5m 6m 7m 8m 9m 2p 3p 4p 9p 9p",
+      "expect": { "win": true, "totalFan": 1, "fans": ["缺一色"] }
+    },
+    {
+      "id": "cs-003",
+      "note": "七对+缺一色",
+      "hand": "1m 1m 2m 2m 3m 3m 4m 4m 5m 5m 6p 6p 7p 7p",
+      "expect": { "win": true, "totalFan": 3, "fans": ["七对", "缺一色"] }
+    },
+    {
+      "id": "cs-004",
+      "note": "清一色+碰碰胡",
+      "hand": "1m 1m 1m 2m 2m 2m 3m 3m 3m 5m 5m 5m 7m 7m",
+      "expect": { "win": true, "totalFan": 5, "fans": ["清一色", "碰碰胡"] }
+    },
+    {
+      "id": "cs-005",
+      "note": "杠上开花+自摸",
+      "hand": "1m 2m 3m 4m 5m 6m 7m 8m 9m 2p 3p 4p 9p 9p",
+      "context": { "isZimo": true, "isKongFlower": true },
+      "expect": { "win": true, "totalFan": 3, "fans": ["杠上开花", "缺一色", "自摸"] }
+    }
+  ]
+}

@@ -1,0 +1,18 @@
+{
+  "name": "mahjong-rule-platform",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "description": "地方麻将规则配置与验证平台:规则包配置、带赖子全拆法穷举、算番、规则说明生成、牌局验证",
+  "scripts": {
+    "test": "node --test \"packages/**/*.test.ts\"",
+    "typecheck": "tsc -p tsconfig.json",
+    "harness": "node packages/harness/run.ts",
+    "build:web": "tsc -p tsconfig.web.json",
+    "web": "npm run build:web && node scripts/serve.mjs"
+  },
+  "devDependencies": {
+    "@types/node": "^22.0.0",
+    "typescript": "~5.9.0"
+  }
+}
